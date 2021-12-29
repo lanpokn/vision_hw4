@@ -46,8 +46,11 @@ pixels_per_cell = (8, 8)
 cells_per_block = (2, 2)
 # train_path = './data/features/train/'
 # test_path = './data/features/test/'
-train_path = './data/fog_features/train/'
-test_path = './data/fog_features/test/'
+# train_path = './data/fog_features/train/'
+# test_path = './data/fog_features/test/'
+train_path = './data/fog_features2/train/'
+test_path = './data/fog_features2/test/'
+
 
 
 # 特征提取
@@ -57,7 +60,8 @@ def getFeat(TrainData, TestData):
         image = np.reshape(data[0].T, (32, 32, 3))
         gray = rgb2gray(image) / 255.0
         #TODO use hog instead formal
-        fd1 ,hog_image= hog(gray, orientations=9, pixels_per_cell=(8, 8),cells_per_block=(1, 1), visualize=True,feature_vector=True)
+        # fd1 ,hog_image= hog(gray, orientations=9, pixels_per_cell=(8, 8),cells_per_block=(1, 1), visualize=True,feature_vector=True)
+        fd1 ,hog_image= hog(gray, orientations=9, pixels_per_cell=(6, 6),cells_per_block=(3, 3), visualize=True,feature_vector=True)
         fd = np.resize(hog_image, (16, 16)).flatten()
         # fd = np.resize(gray, (16, 16)).flatten()
         
@@ -76,7 +80,8 @@ def getFeat(TrainData, TestData):
         gray = rgb2gray(image) / 255.0
         # fd = np.resize(gray, (16, 16)).flatten()
         #TODO use hog instead formal
-        fd1 ,hog_image= hog(gray, orientations=9, pixels_per_cell=(8, 8),cells_per_block=(1, 1), visualize=True,feature_vector=True)
+        # fd1 ,hog_image= hog(gray, orientations=9, pixels_per_cell=(8, 8),cells_per_block=(1, 1), visualize=True,feature_vector=True)
+        fd1 ,hog_image= hog(gray, orientations=9, pixels_per_cell=(6, 6),cells_per_block=(3, 3), visualize=True,feature_vector=True)
         fd = np.resize(hog_image, (16, 16)).flatten()
         #
 

@@ -7,10 +7,12 @@ import os
 import time
 
 
-train_path = './data/fog_features/train/'
-test_path = './data/fog_features/test/'
+# train_path = './data/fog_features/train/'
+# test_path = './data/fog_features/test/'
 # train_path = './data/features/train/'
 # test_path = './data/features/test/'
+train_path = './data/fog_features2/train/'
+test_path = './data/fog_features2/test/'
 
 if __name__ == "__main__":
     t0 = time.time()
@@ -27,8 +29,8 @@ if __name__ == "__main__":
     if clf_type == 'LIN_SVM':
         # 定义分类器
         clf = LinearSVC(max_iter=1000)
-        clf = SVC(kernel="rbf")
-        clf = RandomForestClassifier(n_estimators=50)
+        # clf = SVC(kernel="rbf")
+        # clf = RandomForestClassifier(n_estimators=50)
         print("Training a Linear SVM Classifier......")
         # 训练
         # print(fds[0])
