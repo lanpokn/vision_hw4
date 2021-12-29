@@ -1,4 +1,5 @@
 from skimage.feature import hog
+from skimage import data, color, exposure
 import numpy as np
 import joblib
 import os
@@ -43,8 +44,10 @@ def getData(filePath):
 orientations = 9
 pixels_per_cell = (8, 8)
 cells_per_block = (2, 2)
-train_path = './data/features/train/'
-test_path = './data/features/test/'
+# train_path = './data/features/train/'
+# test_path = './data/features/test/'
+train_path = './data/fog_features/train/'
+test_path = './data/fog_features/test/'
 
 
 # 特征提取
@@ -53,10 +56,14 @@ def getFeat(TrainData, TestData):
     for data in TestData:
         image = np.reshape(data[0].T, (32, 32, 3))
         gray = rgb2gray(image) / 255.0
-        fd = np.resize(gray, (16, 16)).flatten()
-
+        #TODO use hog instead formal
+        fd1 ,hog_image= hog(gray, orientations=9, pixels_per_cell=(8, 8),cells_per_block=(1, 1), visualize=True,feature_vector=True)
+        fd = np.resize(hog_image, (16, 16)).flatten()
+        # fd = np.resize(gray, (16, 16)).flatten()
+        
         # 添加标签和保存图像
         fd = np.concatenate((fd, data[1]))
+        # print(fd)
         filename = list(data[2])
         fd_name = str(filename[0], encoding="utf-8").split('.')[0] + '.feat'
         mkdir_or_exist(train_path)
@@ -67,10 +74,15 @@ def getFeat(TrainData, TestData):
     for data in TrainData:
         image = np.reshape(data[0].T, (32, 32, 3))
         gray = rgb2gray(image) / 255.0
-        fd = np.resize(gray, (16, 16)).flatten()
+        # fd = np.resize(gray, (16, 16)).flatten()
+        #TODO use hog instead formal
+        fd1 ,hog_image= hog(gray, orientations=9, pixels_per_cell=(8, 8),cells_per_block=(1, 1), visualize=True,feature_vector=True)
+        fd = np.resize(hog_image, (16, 16)).flatten()
+        #
 
         # 添加标签和保存图像
         fd = np.concatenate((fd, data[1]))
+        # print(fd[0])
         filename = list(data[2])
         fd_name = str(filename[0], encoding="utf-8").split('.')[0] + '.feat'
         mkdir_or_exist(test_path)
@@ -88,6 +100,7 @@ def rgb2gray(im):
 if __name__ == '__main__':
     t0 = time.time()
     filePath = 'cifar-10-batches-py'
+    # filePath = "data/hog"
     print('extracting feats......')
     TrainData, TestData = getData(filePath)
     getFeat(TrainData, TestData)

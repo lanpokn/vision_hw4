@@ -1,12 +1,16 @@
 from sklearn.svm import LinearSVC
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
 import joblib 
 import glob
 import os
 import time
 
 
-train_path = './data/features/train/'
-test_path = './data/features/test/'
+train_path = './data/fog_features/train/'
+test_path = './data/fog_features/test/'
+# train_path = './data/features/train/'
+# test_path = './data/features/test/'
 
 if __name__ == "__main__":
     t0 = time.time()
@@ -23,13 +27,17 @@ if __name__ == "__main__":
     if clf_type == 'LIN_SVM':
         # 定义分类器
         clf = LinearSVC(max_iter=1000)
+        clf = SVC(kernel="rbf")
+        clf = RandomForestClassifier(n_estimators=50)
         print("Training a Linear SVM Classifier......")
         # 训练
+        # print(fds[0])
         clf.fit(fds, labels)
         print('Training done!')
         print('Testing......')
         # 测试，计算精度
         for feat_path in glob.glob(os.path.join(test_path, '*.feat')):
+            print(total)
             total += 1
             data_test = joblib.load(feat_path)
             temp = data_test[:-1]
