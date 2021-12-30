@@ -30,8 +30,8 @@ if __name__ == "__main__":
         labels.append(data[-1])
     if clf_type == 'LIN_SVM':
         # 定义分类器
-        clf = LinearSVC(max_iter=1000)
-        # clf = SVC(kernel="rbf")
+        # clf = LinearSVC(max_iter=1000)
+        clf = SVC(kernel="rbf")
         # clf = RandomForestClassifier(n_estimators=50)
         print("Training a Linear SVM Classifier......")
         # 训练
