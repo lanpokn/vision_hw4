@@ -11,8 +11,10 @@ import time
 # test_path = './data/fog_features/test/'
 # train_path = './data/features/train/'
 # test_path = './data/features/test/'
-train_path = './data/fog_features2/train/'
-test_path = './data/fog_features2/test/'
+# train_path = './data/fog_features2/train/'
+# test_path = './data/fog_features2/test/'
+train_path = './data/fog_features3/train/'
+test_path = './data/fog_features3/test/'
 
 if __name__ == "__main__":
     t0 = time.time()

@@ -48,8 +48,10 @@ cells_per_block = (2, 2)
 # test_path = './data/features/test/'
 # train_path = './data/fog_features/train/'
 # test_path = './data/fog_features/test/'
-train_path = './data/fog_features2/train/'
-test_path = './data/fog_features2/test/'
+# train_path = './data/fog_features2/train/'
+# test_path = './data/fog_features2/test/'
+train_path = './data/fog_features3/train/'
+test_path = './data/fog_features3/test/'
 
 
 
@@ -61,10 +63,11 @@ def getFeat(TrainData, TestData):
         gray = rgb2gray(image) / 255.0
         #TODO use hog instead formal
         # fd1 ,hog_image= hog(gray, orientations=9, pixels_per_cell=(8, 8),cells_per_block=(1, 1), visualize=True,feature_vector=True)
-        fd1 ,hog_image= hog(gray, orientations=9, pixels_per_cell=(6, 6),cells_per_block=(3, 3), visualize=True,feature_vector=True)
-        fd = np.resize(hog_image, (16, 16)).flatten()
+        # fd1 ,hog_image= hog(gray, orientations=9, pixels_per_cell=(6, 6),cells_per_block=(3, 3), visualize=True,feature_vector=True)
+        fd = hog(gray, orientations=9, pixels_per_cell=(8, 8),cells_per_block=(2, 2))
+        # fd = np.resize(hog_image, (16, 16)).flatten()
         # fd = np.resize(gray, (16, 16)).flatten()
-        
+        # import ipdb; ipdb.set_trace()
         # 添加标签和保存图像
         fd = np.concatenate((fd, data[1]))
         # print(fd)
@@ -81,8 +84,9 @@ def getFeat(TrainData, TestData):
         # fd = np.resize(gray, (16, 16)).flatten()
         #TODO use hog instead formal
         # fd1 ,hog_image= hog(gray, orientations=9, pixels_per_cell=(8, 8),cells_per_block=(1, 1), visualize=True,feature_vector=True)
-        fd1 ,hog_image= hog(gray, orientations=9, pixels_per_cell=(6, 6),cells_per_block=(3, 3), visualize=True,feature_vector=True)
-        fd = np.resize(hog_image, (16, 16)).flatten()
+        # fd1 ,hog_image= hog(gray, orientations=9, pixels_per_cell=(8, 8),cells_per_block=(2, 2), visualize=True,feature_vector=True)
+        fd = hog(gray, orientations=9, pixels_per_cell=(8, 8),cells_per_block=(2, 2))
+        # fd = np.resize(hog_image, (16, 16)).flatten()
         #
 
         # 添加标签和保存图像
